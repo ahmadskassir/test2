@@ -197,6 +197,45 @@
     footer p {
       margin: 5px 0;
     }
+
+    /* تنسيقات الشريط المتحرك */
+    .ticker {
+      display: flex;
+      align-items: center;
+      background: linear-gradient(to bottom, #5a6b3f, #d3d7c6);
+      height: 40px;
+      width: 100%;
+      overflow: hidden;
+    }
+    .ticker-scroll {
+      flex-grow: 1;
+      overflow: hidden;
+      position: relative;
+    }
+    .ticker-content {
+      display: inline-block;
+      white-space: nowrap;
+      animation: scroll 20s linear infinite;
+    }
+    .ticker-content span {
+      display: inline-block;
+      color: #fff;
+      text-shadow: 1px 1px 2px #000;
+      font-family: Tahoma, sans-serif;
+      font-size: 16px;
+    }
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    .ticker-icon {
+      height: 30px;
+      margin-left: 10px;
+    }
   </style>
 </head>
 <body>
@@ -207,6 +246,17 @@
     <h1>المركز الحسيني</h1>
     <h2>حسين علي الحسيني  - موقع </h2>
   </header>
+
+  <!-- الشريط المتحرك (Ticker Bar) -->
+  <div class="ticker">
+    <div class="ticker-scroll">
+      <div class="ticker-content">
+        <span>وإذا أردت أن تكون مؤمناً فعليك بالصبر والصلاة وأقم الصلاة لتكون مؤمناً</span>
+        <span>وإذا أردت أن تكون مؤمناً فعليك بالصبر والصلاة وأقم الصلاة لتكون مؤمناً</span>
+      </div>
+    </div>
+    <img src="https://via.placeholder.com/30x30" alt="Icon" class="ticker-icon">
+  </div>
 
   <!-- قائمة علوية (اختيارية) -->
   <nav>
@@ -318,7 +368,7 @@
 
   <!-- الفوتر (Footer) -->
   <footer>
-    <p>جميع الحقوق محفوظة &copy; 2025</p>
+    <p>جميع الحقوق محفوظة © 2025</p>
     <p>هاتف: 00961-XXXXXXX | بريد إلكتروني: info@example.com</p>
     <p>www.example.com</p>
   </footer>
