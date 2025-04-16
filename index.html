@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>نموذج موقع شبيه</title>
+  <style>
+    /* RESET بسيط لبعض العناصر */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Tahoma, sans-serif;
+      background-color: #f6f6f6;
+      direction: rtl; /* لجعل التنسيق من اليمين لليسار */
+    }
+
+    /* الرأس (الهيدر) */
+    header {
+      background-color: #6c804f; /* لون أخضر مشابه */
+      padding: 10px 20px;
+      text-align: center;
+      color: #fff;
+      position: relative;
+    }
+    header img {
+      max-height: 100px;
+      vertical-align: middle;
+    }
+    header h1 {
+      margin: 10px 0 5px;
+      font-size: 22px;
+    }
+    header h2 {
+      margin: 0;
+      font-size: 16px;
+      opacity: 0.9;
+    }
+
+    /* قائمة الروابط العلوية (في حال رغبت باستعمالها) */
+    nav {
+      background-color: #5a6b3f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px 0;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+    nav ul li {
+      margin: 0 10px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      padding: 5px 10px;
+      transition: background-color 0.3s;
+    }
+    nav ul li a:hover {
+      background-color: #4b5a33;
+    }
+
+    /* حاوية الموقع الرئيسية */
+    .container {
+      width: 95%;
+      max-width: 1200px;
+      margin: 20px auto;
+      display: flex;
+      flex-wrap: nowrap; /* لتجنب التفاف الشريط الجانبي (القائمة) */
+    }
+
+    /* الشريط الجانبي */
+    aside {
+      width: 25%;
+      max-width: 250px;
+      background-color: #d3d7c6;
+      margin-left: auto; /* لجعله على اليمين */
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    aside h3 {
+      background-color: #71824a;
+      color: #fff;
+      padding: 8px;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    /* تنسيقات القوائم في الشريط الجانبي */
+    .aside-links ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    /* العنصر الأب الذي يحوي الرابط الرئيسي + القائمة الفرعية */
+    .menu-item > a {
+      text-decoration: none;
+      color: #333;
+      background-color: #fff;
+      padding: 6px 10px;
+      display: block;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      margin-bottom: 5px;
+      transition: background-color 0.3s;
+      position: relative;
+    }
+    .menu-item > a:hover {
+      background-color: #e3e3e3;
+    }
+
+    /* إشارة توسيع أو طي القائمة */
+    .menu-item > a::after {
+      content: "«";
+      font-weight: bold;
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: transform 0.3s;
+    }
+
+    /* عند الطي */
+    .menu-item > a.collapsed::after {
+      transform: translateY(-50%) rotate(180deg);
+    }
+
+    /* القوائم الفرعية */
+    .sub-menu {
+      display: none; /* مخفية افتراضياً */
+      margin-right: 10px; /* إزاحة بسيطة لتمييز القائمة الفرعية */
+      margin-bottom: 5px;
+    }
+    .sub-menu li {
+      margin-bottom: 3px;
+    }
+    .sub-menu li a {
+      display: block;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      text-decoration: none;
+      color: #333;
+      padding: 6px 10px;
+      transition: background-color 0.3s;
+    }
+    .sub-menu li a:hover {
+      background-color: #e3e3e3;
+    }
+
+    /* القسم الرئيسي (المحتوى) */
+    main {
+      width: 75%;
+      margin-right: auto; /* إذا أردت المحتوى في جهة اليسار */
+      padding: 10px 20px;
+    }
+    main h2 {
+      background-color: #6c804f;
+      color: #fff;
+      padding: 8px;
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+    .post {
+      background-color: #fff;
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .post h3 {
+      margin-bottom: 5px;
+      font-size: 16px;
+      color: #6c804f;
+    }
+    .post .info {
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 10px;
+    }
+    .post p {
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+
+    /* الفوتر */
+    footer {
+      background-color: #6c804f;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+    }
+    footer p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- قسم الهيدر (Header) -->
+  <header>
+    <!-- وضع صورة شعار أو صورة شخصية في الهيدر -->
+    <img src="https://via.placeholder.com/150x100" alt="شعار" />
+    <h1>المركز الحسيني</h1>
+    <h2>حسين علي الحسيني  - موقع </h2>
+  </header>
+
+  <!-- قائمة علوية (اختيارية) -->
+  <nav>
+    <ul>
+      <li><a href="#">الرئيسية</a></li>
+      <li><a href="#">من نحن</a></li>
+      <li><a href="#">المقالات</a></li>
+      <li><a href="#">التواصل</a></li>
+    </ul>
+  </nav>
+
+  <!-- الحاوية الرئيسية التي تضم الشريط الجانبي والمحتوى -->
+  <div class="container">
+    <!-- المحتوى الرئيسي -->
+    <main>
+      <!-- مثال على عنوان قسم -->
+      <h2>أحدث المقالات</h2>
+
+      <!-- مقالة أو منشور 1 -->
+      <div class="post">
+        <h3>عنوان المقالة الأولى</h3>
+        <div class="info">كتب بتاريخ: 16 إبريل 2025 - التصنيف: أخبار</div>
+        <p>
+         اما المنبع الرابع الآن قلنا الحس والتجربة أوّلاً، العقل ثانياً، الوحي ثالثاً اما بالمصداق الأول أو بالمصداق الثاني، المنبع الرابع وهو كشف وشهود العارف العارف هم يدعي بغض النظر انه صادق أو لا يعني حق أو باطل مطابق للواقع أو غير مطابق للواقع أنا ما أتكلم عن هذا هو يدعي وفيه صدقٌ مخبري يعني صادقٌ يقول أنا أرى ما لا ترون واسمع ما لا كما نحن نعتقد في أمير المؤمنين سلام الله عليه كان ماذا يقول؟ كما رسول الله قال عنه وفي نهج البلاغة انك ترى ما أرى وتسمع ما اسمع إلا انك لست بنبي سؤال: عندما يرى ويسمع ما لا نرى أيضاً يستطيع أن يخبرنا عن أمور ما لا نستطيع، نستطيع بالمنبع الأول والمنبع الثاني نصل إليهما أو لا نستطيع؟ لا نستطيع.
+        </p>
+        <p>إذن من أهم بل أهم منبع عند الاتجاه التقليدي هو الوحي والحاكم على الحسي والعقل ومن هنا لابد أن نعرف طبعاً يوجد منابع أخرى إذن المنبع الثالث عند الاتجاه التقليدي من هو؟ ولكن اعلموا لا الوحي بالمعنى أو بالمصداق الأول ولا الانكشاف أو ظهور الحق أو اظهر نفسه بالمصداق الثاني هذا ليس لأحد أن يعين زمانه ومكانه وشخصه وهذه من أهم خصائص النبوة يعني الآن نريد أن نتكلم على المعنى الأول للنبوة هل أن الشخص يقول أنا أريد أكون نبياً أو الله يجعله نبياً فإذن مرتبط بالقابل أم بالفاعل؟ النبوة الله اعلم حيث يجعل رسالته شخصاً
+        </p>
+      </div>
+
+      <!-- مقالة أو منشور 2 -->
+      <div class="post">
+        <h3>عنوان المقالة الثانية</h3>
+        <div class="info">كتب بتاريخ: 15 إبريل 2025 - التصنيف: مقالات</div>
+        <p>أما قسم كبير من المسيحية لا يقبلون هذا المعنى عيسى نبي؟ لا في المنطق القرآني، عيسى من؟ هو الله، إذن له معنى وحي أو ليس له معنى؟ لأنه أنت عندما تفترض أن النبي شخص غير الله فتقول أوحى الله لمن؟ للنبي أليس كذلك؟ أما إذا قال المسيح هو الله لا انه من الله، هذا ابن الله يعني هو الله هذا ابن بمعنى هو ولكن بأي معنى بمعنى هو وهو أنه أن الله تصور بصورة إنسان الله قادر على كل شيء أو غير قادر؟ فاراد أن يصور نفسه بصورة بشرية إذن الوحي له معنى أو ليس له معنى؟ الوحي فرع الاثنينية بين الموحي والموحى إليه وهنا توجد اثنينية أو لا توجد اثنينية ولكن هذا الموجود الذي هو الله ولكن في صورة إنسانية أيضاً يقوم بدور الهداية بدور التبشير بدور الإنذار بدور أن يأخذ بيدي إلى…
+        </p>
+      </div>
+
+      <!-- مقالة أو منشور 3 -->
+      <div class="post">
+        <h3>عنوان المقالة الثالثة</h3>
+        <div class="info">كتب بتاريخ: 14 إبريل 2025 - التصنيف: عام</div>
+        <p>
+          باعتبار انه غايته ليست هنا غايته أين؟ في الدنيا أو في الآخرة؟ وهو يعرف الآخرة أو لا يعرفها؟ لا يعرف الآخرة فإذا لا يعرف الآخرة إذن يستطيع أن يشخص ما ينفعه وما يضره أو لا يستطيع؟ لو كانت الأمور مرتبطة بالدنيا لاستطاع من خلال التجربة ومن خلال الصح والخطأ ومن خلال الاستفادة من الآخرين أن يشخص ماذا ينفعه وماذا يضره ولكن ماذا ينفع ويضر في الآخرة يستطيع أن يجرب أو لا يستطيع؟ إذن لابد أن يوجد  احد يعرف هناك ما ينفع وما يضر.
+        </p>
+      </div>
+    </main>
+
+    <!-- الشريط الجانبي -->
+    <aside>
+      <h3>القائمة الرئيسية</h3>
+      <div class="aside-links">
+        <ul>
+          <!-- عنصر واحد رئيسي مع قائمة فرعية داخلية (نموذجية) -->
+          <li class="menu-item">
+            <a href="#">أشعار السيد</a>
+            <ul class="sub-menu">
+              <li><a href="#">قصيدة 1</a></li>
+              <li><a href="#">قصيدة 2</a></li>
+              <li><a href="#">قصيدة 3</a></li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <a href="#">الخطب والمحاضرات</a>
+            <ul class="sub-menu">
+              <li><a href="#">الخطب</a></li>
+              <li><a href="#">محاضرات رمضانية</a></li>
+              <li><a href="#">محاضرات عاشورائية</a></li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <a href="#">فتاوى (عبادات)</a>
+            <ul class="sub-menu">
+              <li><a href="#">فتاوى الصلاة</a></li>
+              <li><a href="#">فتاوى الصوم</a></li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <a href="#">فتاوى (معاملات)</a>
+            <ul class="sub-menu">
+              <li><a href="#">فتاوى التجارة</a></li>
+              <li><a href="#">فتاوى الزواج</a></li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <a href="#">البحوث الفقهية</a>
+            <ul class="sub-menu">
+              <li><a href="#">بحث فقهي 1</a></li>
+              <li><a href="#">بحث فقهي 2</a></li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <a href="#">بحوث فلسفية وأخلاقية</a>
+            <ul class="sub-menu">
+              <li><a href="#">بحث فلسفي</a></li>
+              <li><a href="#">بحث أخلاقي</a></li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <a href="#">البحوث العقائدية</a>
+            <ul class="sub-menu">
+              <li><a href="#">بحث عقائدي 1</a></li>
+              <li><a href="#">بحث عقائدي 2</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <!-- الفوتر (Footer) -->
+  <footer>
+    <p>جميع الحقوق محفوظة &copy; 2025</p>
+    <p>هاتف: 00961-XXXXXXX | بريد إلكتروني: info@example.com</p>
+    <p>www.example.com</p>
+  </footer>
+
+  <!-- شيفرة جافاسكربت بسيطة لفتح/إغلاق القوائم الفرعية -->
+  <script>
+    // نحدد جميع العناصر الأب التي تحتوي على رابط رئيسي + قائمة فرعية
+    var menuItems = document.querySelectorAll('.menu-item > a');
+
+    menuItems.forEach(function(menuLink) {
+      menuLink.addEventListener('click', function(e) {
+        e.preventDefault(); // لمنع الانتقال الفوري للرابط
+
+        // العنصر التالي للرابط الرئيسي (القائمة الفرعية)
+        var subMenu = this.nextElementSibling;
+
+        // إذا كان موجوداً ويحمل صنف "sub-menu"
+        if (subMenu && subMenu.classList.contains('sub-menu')) {
+          // نتحقق من حالته ونقلب بين الإظهار والإخفاء
+          if (subMenu.style.display === 'block') {
+            subMenu.style.display = 'none';
+            this.classList.remove('collapsed');
+          } else {
+            subMenu.style.display = 'block';
+            this.classList.add('collapsed');
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
