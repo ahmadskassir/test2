@@ -240,6 +240,50 @@
       height: 30px;
       margin-left: 10px;
     }
+        /* قائمة جديد الموقع المتحركة عمودياً */
+    .news-ticker {
+      height: 120px; overflow: hidden; position: relative;
+      background: linear-gradient(to bottom, #5a6b3f, #6c804f);
+      padding: 5px; border-radius: 4px; margin-bottom: 20px;
+    }
+    .news-ticker ul {
+      list-style: none; position: absolute;
+      width: 100%; padding-right: 10px;
+      animation: scrollUp 8s linear infinite;
+    }
+    .news-ticker li {
+      margin-bottom: 10px;
+    }
+    .news-ticker a {
+      color: #fff; text-decoration: none;
+      display: block; font-size: 14px;
+      text-shadow: 1px 1px 2px #000;
+    }
+    .news-ticker:hover ul {
+      animation-play-state: paused;
+    }
+    @keyframes scrollUp {
+      0% { top: 100%; }
+      100% { top: -100%; }
+    }
+
+    /* حقل البحث */
+    .search-box {
+      background-color: #fff; padding: 10px;
+      border: 1px solid #ccc; border-radius: 4px;
+    }
+    .search-box input[type="text"] {
+      width: calc(100% - 22px); padding: 5px;
+      margin-bottom: 10px; border: 1px solid #aaa;
+      border-radius: 3px;
+    }
+    .search-box button {
+      width: 100%; padding: 6px;
+      background-color: #71824a; color: #fff;
+      border: none; border-radius: 3px;
+      cursor: pointer; transition: background-color 0.3s;
+    }
+    .search-box button:hover { background-color: #5a6b3f; }
   </style>
 </head>
 <body>
