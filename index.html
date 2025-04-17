@@ -18,7 +18,6 @@
 
     /* الرأس (الهيدر) */
     header {
-      /*background-color: #6c804f; /* لون أخضر مشابه */
       background: linear-gradient(to bottom, #5a6b3f, #6c804f);
       padding: 10px 20px;
       text-align: center;
@@ -39,14 +38,13 @@
       opacity: 0.9;
     }
 
-    /* قائمة الروابط العلوية (في حال رغبت باستعمالها) */
+    /* قائمة الروابط العلوية */
     nav {
       background-color: #5a6b3f;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 5px 0;
-      
     }
     nav ul {
       list-style: none;
@@ -71,7 +69,7 @@
       max-width: 1200px;
       margin: 20px auto;
       display: flex;
-      flex-wrap: nowrap; /* لتجنب التفاف الشريط الجانبي (القائمة) */
+      flex-wrap: nowrap;
     }
 
     /* الشريط الجانبي */
@@ -79,7 +77,7 @@
       width: 25%;
       max-width: 250px;
       background-color: #d3d7c6;
-      margin-left: auto; /* لجعله على اليمين */
+      margin-left: auto;
       padding: 10px;
       border: 1px solid #ccc;
     }
@@ -97,7 +95,6 @@
       padding: 0;
       margin: 0;
     }
-    /* العنصر الأب الذي يحوي الرابط الرئيسي + القائمة الفرعية */
     .menu-item > a {
       text-decoration: none;
       color: #333;
@@ -113,8 +110,6 @@
     .menu-item > a:hover {
       background-color: #e3e3e3;
     }
-
-    /* إشارة توسيع أو طي القائمة */
     .menu-item > a::after {
       content: "«";
       font-weight: bold;
@@ -124,16 +119,12 @@
       transform: translateY(-50%);
       transition: transform 0.3s;
     }
-
-    /* عند الطي */
     .menu-item > a.collapsed::after {
       transform: translateY(-50%) rotate(180deg);
     }
-
-    /* القوائم الفرعية */
     .sub-menu {
-      display: none; /* مخفية افتراضياً */
-      margin-right: 10px; /* إزاحة بسيطة لتمييز القائمة الفرعية */
+      display: none;
+      margin-right: 10px;
       margin-bottom: 5px;
     }
     .sub-menu li {
@@ -156,7 +147,7 @@
     /* القسم الرئيسي (المحتوى) */
     main {
       width: 75%;
-      margin-right: auto; /* إذا أردت المحتوى في جهة اليسار */
+      margin-right: auto;
       padding: 10px 20px;
     }
     main h2 {
@@ -208,8 +199,6 @@
       height: 40px;
       width: 100%;
       overflow: hidden;
-       /*  border-top: 2px solid #5a6b3f; الخط العلوي */
-       /* border-bottom: 10px solid #5a6b3f; الخط السفلي */
     }
     .ticker-scroll {
       flex-grow: 1;
@@ -229,34 +218,39 @@
       font-size: 16px;
     }
     @keyframes scroll {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
     .ticker-icon {
       height: 30px;
       margin-left: 10px;
     }
-        /* قائمة جديد الموقع المتحركة عمودياً */
+
+    /* قائمة جديد الموقع المتحركة عمودياً */
     .news-ticker {
-      height: 120px; overflow: hidden; position: relative;
+      height: 120px;
+      overflow: hidden;
+      position: relative;
       background: linear-gradient(to bottom, #6c804f, #6c804f);
-      padding: 5px; border-radius: 4px; margin-bottom: 20px;
+      padding: 5px;
+      border-radius: 4px;
+      margin-bottom: 20px;
     }
     .news-ticker ul {
-      list-style: none; position: absolute;
-      width: 100%; padding-right: 10px;
+      list-style: none;
+      position: absolute;
+      width: 100%;
+      padding-right: 10px;
       animation: scrollUp 8s linear infinite;
     }
     .news-ticker li {
       margin-bottom: 10px;
     }
     .news-ticker a {
-      color: #fff; text-decoration: none;
-      display: block; font-size: 14px;
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      font-size: 14px;
       text-shadow: 1px 1px 2px #000;
     }
     .news-ticker:hover ul {
@@ -269,27 +263,36 @@
 
     /* حقل البحث */
     .search-box {
-      background-color: #fff; padding: 10px;
-      border: 1px solid #ccc; border-radius: 4px;
+      background-color: #fff;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
     .search-box input[type="text"] {
-      width: calc(100% - 22px); padding: 5px;
-      margin-bottom: 10px; border: 1px solid #aaa;
+      width: calc(100% - 22px);
+      padding: 5px;
+      margin-bottom: 10px;
+      border: 1px solid #aaa;
       border-radius: 3px;
     }
     .search-box button {
-      width: 100%; padding: 6px;
-      background-color: #71824a; color: #fff;
-      border: none; border-radius: 3px;
-      cursor: pointer; transition: background-color 0.3s;
+      width: 100%;
+      padding: 6px;
+      background-color: #71824a;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s;
     }
-    .search-box button:hover { background-color: #5a6b3f; }
+    .search-box button:hover {
+      background-color: #5a6b3f;
+    }
   </style>
 </head>
 <body>
   <!-- قسم الهيدر (Header) -->
   <header>
-    <!-- وضع صورة شعار أو صورة شخصية في الهيدر -->
     <img src="https://via.placeholder.com/150x100" alt="شعار" />
     <h1>المركز الشيعي</h1>
     <h2>موقع شيعة محمد عليهم السلام </h2>
@@ -318,11 +321,10 @@
   <div class="container">
     <!-- المحتوى الرئيسي -->
     <main>
-      <!-- مثال على عنوان قسم -->
       <h2>أحدث المقالات</h2>
 
       <!-- مقالة أو منشور 1 -->
-      <div class="post">
+      <div class="post" id="article1">
         <h3>عنوان المقالة الأولى</h3>
         <div class="info">كتب بتاريخ: 16 إبريل 2025 - التصنيف: أخبار</div>
         <p>
@@ -333,7 +335,7 @@
       </div>
 
       <!-- مقالة أو منشور 2 -->
-      <div class="post">
+      <div class="post" id="article2">
         <h3>عنوان المقالة الثانية</h3>
         <div class="info">كتب بتاريخ: 15 إبريل 2025 - التصنيف: مقالات</div>
         <p>أما قسم كبير من المسيحية لا يقبلون هذا المعنى عيسى نبي؟ لا في المنطق القرآني، عيسى من؟ هو الله، إذن له معنى وحي أو ليس له معنى؟ لأنه أنت عندما تفترض أن النبي شخص غير الله فتقول أوحى الله لمن؟ للنبي أليس كذلك؟ أما إذا قال المسيح هو الله لا انه من الله، هذا ابن الله يعني هو الله هذا ابن بمعنى هو ولكن بأي معنى بمعنى هو وهو أنه أن الله تصور بصورة إنسان الله قادر على كل شيء أو غير قادر؟ فاراد أن يصور نفسه بصورة بشرية إذن الوحي له معنى أو ليس له معنى؟ الوحي فرع الاثنينية بين الموحي والموحى إليه وهنا توجد اثنينية أو لا توجد اثنينية ولكن هذا الموجود الذي هو الله ولكن في صورة إنسانية أيضاً يقوم بدور الهداية بدور التبشير بدور الإنذار بدور أن يأخذ بيدي إلى…
@@ -341,11 +343,11 @@
       </div>
 
       <!-- مقالة أو منشور 3 -->
-      <div class="post">
+      <div class="post" id="article3">
         <h3>عنوان المقالة الثالثة</h3>
         <div class="info">كتب بتاريخ: 14 إبريل 2025 - التصنيف: عام</div>
         <p>
-          باعتبار انه غايته ليست هنا غايته أين؟ في الدنيا أو في الآخرة؟ وهو يعرف الآخرة أو لا يعرفها؟ لا يعرف الآخرة فإذا لا يعرف الآخرة إذن يستطيع أن يشخص ما ينفعه وما يضره أو لا يستطيع؟ لو كانت الأمور مرتبطة بالدنيا لاستطاع من خلال التجربة ومن خلال الصح والخطأ ومن خلال الاستفادة من الآخرين أن يشخص ماذا ينفعه وماذا يضره ولكن ماذا ينفع ويضر في الآخرة يستطيع أن يجرب أو لا يستطيع؟ إذن لابد أن يوجد  احد يعرف هناك ما ينفع وما يضر.
+          باعتبار انه غايته ليست هنا غايته أين؟ في الدنيا أو في الآخرة؟ وهو يعرف الآخرة أو لا يعرفها؟ لا يعرف الآخرة فإذا لا يعرف الآخرة إذن يستطيع أن يشخص ما ينفعه وما يضره أو لا يستطيع؟ لو كانت الأمور مرتبطة بالدنيا لاستطاع من خلال التجربة ومن خلال الصح والخطأ ومن خلال الاستفادة من الآخرين أن يشخص ماذا ينفعه وماذا يضره ولكن ماذا ينفع ويضر في الآخرة يستطيع أن يجرب أو لا يستطيع؟ إذن لابد أن يوجد احد يعرف هناك ما ينفع وما يضر.
         </p>
       </div>
     </main>
@@ -355,7 +357,6 @@
       <h3>القائمة الرئيسية</h3>
       <div class="aside-links">
         <ul>
-          <!-- عنصر واحد رئيسي مع قائمة فرعية داخلية (نموذجية) -->
           <li class="menu-item">
             <a href="#">أشعار السيد</a>
             <ul class="sub-menu">
@@ -406,7 +407,11 @@
               <li><a href="#">بحث عقائدي 1</a></li>
               <li><a href="#">بحث عقائدي 2</a></li>
             </ul>
-                  <h3>جديد الموقع</h3>
+          </li>
+        </ul>
+      </div>
+
+      <h3>جديد الموقع</h3>
       <div class="news-ticker" id="news-ticker">
         <ul>
           <li><a href="#article4">عنوان المقالة الرابعة</a></li>
@@ -416,14 +421,13 @@
         </ul>
       </div>
 
-      <!-- قسم البحث -->
+      <!-- قسم البحث المعدل -->
       <h3>البحث في الموقع</h3>
       <div class="search-box">
-        <input type="text" id="search-input" placeholder="اكتب كلمة للبحث..." />
-        <button id="search-btn">ابحث</button>
-      </div>
-          </li>
-        </ul>
+        <form action="search_results.html" method="get">
+          <input type="text" name="query" id="search-input" placeholder="اكتب كلمة للبحث..." />
+          <button type="submit" id="search-btn">ابحث</button>
+        </form>
       </div>
     </aside>
   </div>
@@ -437,19 +441,12 @@
 
   <!-- شيفرة جافاسكربت بسيطة لفتح/إغلاق القوائم الفرعية -->
   <script>
-    // نحدد جميع العناصر الأب التي تحتوي على رابط رئيسي + قائمة فرعية
     var menuItems = document.querySelectorAll('.menu-item > a');
-
     menuItems.forEach(function(menuLink) {
       menuLink.addEventListener('click', function(e) {
-        e.preventDefault(); // لمنع الانتقال الفوري للرابط
-
-        // العنصر التالي للرابط الرئيسي (القائمة الفرعية)
+        e.preventDefault();
         var subMenu = this.nextElementSibling;
-
-        // إذا كان موجوداً ويحمل صنف "sub-menu"
         if (subMenu && subMenu.classList.contains('sub-menu')) {
-          // نتحقق من حالته ونقلب بين الإظهار والإخفاء
           if (subMenu.style.display === 'block') {
             subMenu.style.display = 'none';
             this.classList.remove('collapsed');
