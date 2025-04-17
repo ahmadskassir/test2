@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>نتائج البحث</title>
+  <style>
+    /* RESET بسيط لبعض العناصر */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Tahoma, sans-serif;
+      background-color: #f6f6f6;
+      direction: rtl;
+    }
+
+    /* الرأس (الهيدر) */
+    header {
+      background: linear-gradient(to bottom, #5a6b3f, #6c804f);
+      padding: 10px 20px;
+      text-align: center;
+      color: #fff;
+      position: relative;
+    }
+    header img {
+      max-height: 100px;
+      vertical-align: middle;
+    }
+    header h1 {
+      margin: 10px 0 5px;
+      font-size: 22px;
+    }
+    header h2 {
+      margin: 0;
+      font-size: 16px;
+      opacity: 0.9;
+    }
+
+    /* قائمة الروابط العلوية */
+    nav {
+      background-color: #5a6b3f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px 0;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+    nav ul li {
+      margin: 0 10px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      padding: 5px 10px;
+      transition: background-color 0.3s;
+    }
+    nav ul li a:hover {
+      background-color: #4b5a33;
+    }
+
+    /* حاوية الموقع الرئيسية */
+    .container {
+      width: 95%;
+      max-width: 1200px;
+      margin: 20px auto;
+      display: flex;
+      flex-wrap: nowrap;
+    }
+
+    /* الشريط الجانبي */
+    aside {
+      width: 25%;
+      max-width: 250px;
+      background-color: #d3d7c6;
+      margin-left: auto;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    aside h3 {
+      background-color: #71824a;
+      color: #fff;
+      padding: 8px;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    /* تنسيقات القوائم في الشريط الجانبي */
+    .aside-links ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .menu-item > a {
+      text-decoration: none;
+      color: #333;
+      background-color: #fff;
+      padding: 6px 10px;
+      display: block;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      margin-bottom: 5px;
+      transition: background-color 0.3s;
+      position: relative;
+    }
+    .menu-item > a:hover {
+      background-color: #e3e3e3;
+    }
+    .menu-item > a::after {
+      content: "«";
+      font-weight: bold;
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: transform 0.3s;
+    }
+    .menu-item > a.collapsed::after {
+      transform: translateY(-50%) rotate(180deg);
+    }
+    .sub-menu {
+      display: none;
+      margin-right: 10px;
+      margin-bottom: 5px;
+    }
+    .sub-menu li {
+      margin-bottom: 3px;
+    }
+    .sub-menu li a {
+      display: block;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      text-decoration: none;
+      color: #333;
+      padding: 6px 10px;
+      transition: background-color 0.3s;
+    }
+    .sub-menu li a:hover {
+      background-color: #e3e3e3;
+    }
+
+    /* القسم الرئيسي (المحتوى) */
+    main {
+      width: 75%;
+      margin-right: auto;
+      padding: 10px 20px;
+    }
+    main h2 {
+      background-color: #6c804f;
+      color: #fff;
+      padding: 8px;
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+    .post {
+      background-color: #fff;
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .post h3 {
+      margin-bottom: 5px;
+      font-size: 16px;
+      color: #6c804f;
+    }
+    .post h3 a {
+      color: #6c804f;
+      text-decoration: none;
+    }
+    .post h3 a:hover {
+      text-decoration: underline;
+    }
+    .post .info {
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 10px;
+    }
+    .post p {
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+
+    /* الفوتر */
+    footer {
+      background-color: #6c804f;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+    }
+    footer p {
+      margin: 5px 0;
+    }
+
+    /* تنسيقات الشريط المتحرك */
+    .ticker {
+      display: flex;
+      align-items: center;
+      background: linear-gradient(to bottom, #5a6b3f, #6c804f);
+      height: 40px;
+      width: 100%;
+      overflow: hidden;
+    }
+    .ticker-scroll {
+      flex-grow: 1;
+      overflow: hidden;
+      position: relative;
+    }
+    .ticker-content {
+      display: inline-block;
+      white-space: nowrap;
+      animation: scroll 20s linear infinite;
+    }
+    .ticker-content span {
+      display: inline-block;
+      color: #fff;
+      text-shadow: 1px 1px 2px #000;
+      font-family: Tahoma, sans-serif;
+      font-size: 16px;
+    }
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .ticker-icon {
+      height: 30px;
+      margin-left: 10px;
+    }
+
+    /* قائمة جديد الموقع المتحركة عمودياً */
+    .news-ticker {
+      height: 120px;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(to bottom, #6c804f, #6c804f);
+      padding: 5px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+    .news-ticker ul {
+      list-style: none;
+      position: absolute;
+      width: 100%;
+      padding-right: 10px;
+      animation: scrollUp 8s linear infinite;
+    }
+    .news-ticker li {
+      margin-bottom: 10px;
+    }
+    .news-ticker a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      font-size: 14px;
+      text-shadow: 1px 1px 2px #000;
+    }
+    .news-ticker:hover ul {
+      animation-play-state: paused;
+    }
+    @keyframes scrollUp {
+      0% { top: 100%; }
+      100% { top: -100%; }
+    }
+  </style>
+</head>
+<body>
+  <!-- قسم الهيدر (Header) -->
+  <header>
+    <img src="https://via.placeholder.com/150x100" alt="شعار" />
+    <h1>المركز الشيعي</h1>
+    <h2>موقع شيعة محمد عليهم السلام </h2>
+  </header>
+
+  <!-- الشريط المتحرك (Ticker Bar) -->
+  <div class="ticker">
+    <div class="ticker-scroll">
+      <div class="ticker-content">
+        <span>وما كان المؤمنون لينفروا كافة فلولا نفر من كل فرقة منهم طائفة ليتفقهوا في الدين ولينذروا قومهم إذا رجعوا إليهم لعلهم يحذرون</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- قائمة علوية (اختيارية) -->
+  <nav>
+    <ul>
+      <li><a href="index.html">الرئيسية</a></li>
+      <li><a href="#">من نحن</a></li>
+      <li><a href="#">المقالات</a></li>
+      <li><a href="#">التواصل</a></li>
+    </ul>
+  </nav>
+
+  <!-- الحاوية الرئيسية التي تضم الشريط الجانبي والمحتوى -->
+  <div class="container">
+    <!-- المحتوى الرئيسي -->
+    <main>
+      <h2>نتائج البحث</h2>
+      <div id="search-results">
+        <!-- هنا سيتم عرض النتائج -->
+      </div>
+    </main>
+
+    <!-- الشريط الجانبي -->
+    <aside>
+      <h3>القائمة الرئيسية</h3>
+      <div class="aside-links">
+        <ul>
+          <li class="menu-item">
+            <a href="#">أشعار السيد</a>
+            <ul class="sub-menu">
+              <li><a href="#">قصيدة 1</a></li>
+              <li><a href="#">قصيدة 2</a></li>
+              <li><a href="#">قصيدة 3</a></li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <a href="#">الخطب والمحاضرات</a>
+            <ul class="sub-menu">
+              <li><a href="#">الخطب</a></li>
+              <li><a href="#">محاضرات رمضانية</a></li>
+              <li><a href="#">محاضرات عاشورائية</a></li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <a href="#">فتاوى (عبادات)</a>
+            <ul class="sub-menu">
+              <li><a href="#">فتاوى الصلاة</a></li>
+              <li><a href="#">فتاوى الصوم</a></li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <a href="#">فتاوى (معاملات)</a>
+            <ul class="sub-menu">
+              <li><a href="#">فتاوى التجارة</a></li>
+              <li><a href="#">فتاوى الزواج</a></li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <a href="#">البحوث الفقهية</a>
+            <ul class="sub-menu">
+              <li><a href="#">بحث فقهي 1</a></li>
+              <li><a href="#">بحث فقهي 2</a></li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <a href="#">بحوث فلسفية وأخلاقية</a>
+            <ul class="sub-menu">
+              <li><a href="#">بحث فلسفي</a></li>
+              <li><a href="#">بحث أخلاقي</a></li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <a href="#">البحوث العقائدية</a>
+            <ul class="sub-menu">
+              <li><a href="#">بحث عقائدي 1</a></li>
+              <li><a href="#">بحث عقائدي 2</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <h3>جديد الموقع</h3>
+      <div class="news-ticker" id="news-ticker">
+        <ul>
+          <li><a href="#article4">عنوان المقالة الرابعة</a></li>
+          <li><a href="#article3">عنوان المقالة الثالثة</a></li>
+          <li><a href="#article2">عنوان المقالة الثانية</a></li>
+          <li><a href="#article1">عنوان المقالة الأولى</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <!-- الفوتر (Footer) -->
+  <footer>
+    <p>جميع الحقوق محفوظة © 2025</p>
+    <p>هاتف: 00961-XXXXXXX | بريد إلكتروني: info@example.com</p>
+    <p>www.example.com</p>
+  </footer>
+
+  <!-- شيفرة جافاسكربت لعرض النتائج -->
+  <script>
+    // بيانات المقالات
+    const articles = [
+      {
+        id: "article1",
+        title: "عنوان المقالة الأولى",
+        date: "16 إبريل 2025",
+        category: "أخبار",
+        content: "اما المنبع الرابع الآن قلنا الحس والتجربة أوّلاً، العقل ثانياً، الوحي ثالثاً اما بالمصداق الأول أو بالمصداق الثاني، المنبع الرابع وهو كشف وشهود العارف العارف هم يدعي بغض النظر انه صادق أو لا يعني حق أو باطل مطابق للواقع أو غير مطابق للواقع أنا ما أتكلم عن هذا هو يدعي وفيه صدقٌ مخبري يعني صادقٌ يقول أنا أرى ما لا ترون واسمع ما لا كما نحن نعتقد في أمير المؤمنين سلام الله عليه كان ماذا يقول؟ كما رسول الله قال عنه وفي نهج البلاغة انك ترى ما أرى وتسمع ما اسمع إلا انك لست بنبي سؤال: عندما يرى ويسمع ما لا نرى أيضاً يستطيع أن يخبرنا عن أمور ما لا نستطيع، نستطيع بالمنبع الأول والمنبع الثاني نصل إليهما أو لا نستطيع؟ لا نستطيع."
+      },
+      {
+        id: "article2",
+        title: "عنوان المقالة الثانية",
+        date: "15 إبريل 2025",
+        category: "مقالات",
+        content: "أما قسم كبير من المسيحية لا يقبلون هذا المعنى عيسى نبي؟ لا في المنطق القرآني، عيسى من؟ هو الله، إذن له معنى وحي أو ليس له معنى؟ لأنه أنت عندما تفترض أن النبي شخص غير الله فتقول أوحى الله لمن؟ للنبي أليس كذلك؟ أما إذا قال المسيح هو الله لا انه من الله، هذا ابن الله يعني هو الله هذا ابن بمعنى هو ولكن بأي معنى بمعنى هو وهو أنه أن الله تصور بصورة إنسان الله قادر على كل شيء أو غير قادر؟ فاراد أن يصور نفسه بصورة بشرية إذن الوحي له معنى أو ليس له معنى؟ الوحي فرع الاثنينية بين الموحي والموحى إليه وهنا توجد اثنينية أو لا توجد اثنينية ولكن هذا الموجود الذي هو الله ولكن في صورة إنسانية أيضاً يقوم بدور الهداية بدور التبشير بدور الإنذار بدور أن يأخذ بيدي إلى…"
+      },
+      {
+        id: "article3",
+        title: "عنوان المقالة الثالثة",
+        date: "14 إبريل 2025",
+        category: "عام",
+        content: "باعتبار انه غايته ليست هنا غايته أين؟ في الدنيا أو في الآخرة؟ وهو يعرف الآخرة أو لا يعرفها؟ لا يعرف الآخرة فإذا لا يعرف الآخرة إذن يستطيع أن يشخص ما ينفعه وما يضره أو لا يستطيع؟ لو كانت الأمور مرتبطة بالدنيا لاستطاع من خلال التجربة ومن خلال الصح والخطأ ومن خلال الاستفادة من الآخرين أن يشخص ماذا ينفعه وماذا يضره ولكن ماذا ينفع ويضر في الآخرة يستطيع أن يجرب أو لا يستطيع؟ إذن لابد أن يوجد احد يعرف هناك ما ينفع وما يضر."
+      }
+    ];
+
+    // جلب الكلمة المفتاحية من عنوان URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const query = urlParams.get('query');
+
+    // دالة لعرض النتائج
+    function displayResults(query) {
+      const resultsContainer = document.getElementById('search-results');
+      resultsContainer.innerHTML = '';
+
+      if (!query) {
+        resultsContainer.innerHTML = '<p>يرجى إدخال كلمة للبحث.</p>';
+        return;
+      }
+
+      const filteredArticles = articles.filter(article => 
+        article.title.includes(query) || article.content.includes(query)
+      );
+
+      if (filteredArticles.length === 0) {
+        resultsContainer.innerHTML = '<p>لا توجد نتائج مطابقة للبحث.</p>';
+        return;
+      }
+
+      filteredArticles.forEach(article => {
+        const articleElement = document.createElement('div');
+        articleElement.classList.add('post');
+        articleElement.innerHTML = `
+          <h3><a href="index.html#${article.id}">${article.title}</a></h3>
+          <div class="info">كتب بتاريخ: ${article.date} - التصنيف: ${article.category}</div>
+          <p>${article.content}</p>
+        `;
+        resultsContainer.appendChild(articleElement);
+      });
+    }
+
+    // عرض النتائج عند تحميل الصفحة
+    displayResults(query);
+
+    // شيفرة جافاسكربت لفتح/إغلاق القوائم الفرعية
+    var menuItems = document.querySelectorAll('.menu-item > a');
+    menuItems.forEach(function(menuLink) {
+      menuLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        var subMenu = this.nextElementSibling;
+        if (subMenu && subMenu.classList.contains('sub-menu')) {
+          if (subMenu.style.display === 'block') {
+            subMenu.style.display = 'none';
+            this.classList.remove('collapsed');
+          } else {
+            subMenu.style.display = 'block';
+            this.classList.add('collapsed');
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
